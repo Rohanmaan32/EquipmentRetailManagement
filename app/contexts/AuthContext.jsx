@@ -13,19 +13,19 @@ export const AuthProvider = ({ children }) => {
         ] 
         saveToLocalStorage('users',users);
 
-        const curUser = getFromLocalStorage(curUser);
+        const curUser = getFromLocalStorage("curUser");
         if (curUser) setUser(curUser);
     },[]);
 
    
     const login = (userData) => {
         setUser(userData);
-        saveToLocalStorage(curUser,userData);
+        saveToLocalStorage("curUser",userData);
     };
 
     const logout = () => {
         setUser(null);
-        saveToLocalStorage(curUser,null);
+        saveToLocalStorage("curUser",null);
     };
 
     return (
