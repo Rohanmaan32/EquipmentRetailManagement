@@ -1,5 +1,5 @@
-import React, { useEffect, createContext, useState, useContext } from 'react';
-import {saveToLocalStorage, getFromLocalStorage} from '../utils/localStorageUtils.js'; 
+import { useEffect, createContext, useState, useContext } from 'react';
+import {saveToLocalStorage, getFromLocalStorage,removeFromLocalStorage} from '../utils/localStorageUtils.js'; 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -14,8 +14,10 @@ export const AuthProvider = ({ children }) => {
         saveToLocalStorage('users',users);
 
         const curUser = getFromLocalStorage("curUser");
-        if (curUser) setUser(curUser);
-    },[]);
+        if (curUser && curUser !== null) {
+            setUser(curUser);
+        }
+    }, []);
 
    
     const login = (userData) => {
@@ -25,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
-        saveToLocalStorage("curUser",null);
+        removeFromLocalStorage("curUser");
     };
 
     return (

@@ -1,9 +1,9 @@
 import LoginForm from '../components/Authentication/LoginForm';
-
+import Topbar from '../components/Home/TopBar'
 const LoginPage = () => {
     return (
         <div>
-            <h1>Login</h1>
+            <Topbar />
             <LoginForm />
         </div>
     );

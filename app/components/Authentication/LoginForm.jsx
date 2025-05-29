@@ -19,6 +19,7 @@ const LoginForm = () => {
         if (match) {
             login(match);
             navigate('/');
+            
         } else {
             setError('Invalid username or password');
         }
