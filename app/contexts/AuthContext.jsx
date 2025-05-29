@@ -4,15 +4,16 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-     
-    useEffect(() => {
-        const users = [
+    
+    const users = [
         { id: "1", role: "Admin", username: "admin@entnt.in", password: "admin123" },
         { id: "2", role: "Staff", username: "staff@entnt.in", password: "staff123" },
         { id: "3", role: "Customer", username: "customer@entnt.in", password: "cust123" },
-        ] 
+        ];
+        
+    useEffect(() => {
         saveToLocalStorage('users',users);
-
+        
         const curUser = getFromLocalStorage("curUser");
         if (curUser && curUser !== null) {
             setUser(curUser);
