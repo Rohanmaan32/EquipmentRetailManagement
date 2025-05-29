@@ -5,6 +5,7 @@ import {useAuth} from "../../contexts/AuthContext.jsx";
 const links = [
     {name:'Home', path : '/'},
     {name:'Login', path : '/login'},
+    {name:'Equipment', path :'/equipment'},
 
 ];
 

@@ -10,7 +10,7 @@ import {
 import "./app.css";
 
 import { AuthProvider } from "./contexts/AuthContext";
-
+import { EquipmentProvider } from "./contexts/EquipmentContext";
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -32,7 +32,9 @@ export function Layout({ children }) {
 export default function App() {
   return (
     <AuthProvider>
-      <Outlet />
+      <EquipmentProvider>
+        <Outlet />
+        </EquipmentProvider>
     </AuthProvider>
   );
 }
