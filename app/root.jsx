@@ -11,6 +11,7 @@ import "./app.css";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import { EquipmentProvider } from "./contexts/EquipmentContext";
+import { DarkModeProvider } from "./contexts/DarkmodeContext";
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -31,11 +32,13 @@ export function Layout({ children }) {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <EquipmentProvider>
-        <Outlet />
+    <DarkModeProvider>
+      <AuthProvider>
+        <EquipmentProvider>
+          <Outlet />
         </EquipmentProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </DarkModeProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import LoginForm from '../components/Authentication/LoginForm';
-import Topbar from '../components/Home/TopBar'
+import Topbar from '../components/Home/TopBar';
+
 const LoginPage = () => {
     return (
         <div>

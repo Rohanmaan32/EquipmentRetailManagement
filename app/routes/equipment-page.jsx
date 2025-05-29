@@ -1,8 +1,14 @@
-import { DisplayEquipment } from "../components/Equipment/Equipment";
-
+import EquipmentList from "../components/Equipment/Equipment";
+import Topbar from '../components/Home/TopBar';
 const EquipmentPage = () => {
     
-    return {
-        DisplayEquipment
-    }
-}
+    return (
+        <>
+        <Topbar />
+        <EquipmentList />
+        
+        </>
+    );
+};
+
+export default EquipmentPage;

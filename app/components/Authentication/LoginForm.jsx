@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
-import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorageUtils.js'; 
+import { getFromLocalStorage } from '../../utils/localStorageUtils.js'; 
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -26,12 +26,13 @@ const LoginForm = () => {
     };
 
     return (
+        <div className=' block dark:bg-gray-700 min-h-screen '>
         <form 
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto mt-12 p-8 bg-white rounded-lg shadow-lg flex flex-col gap-4"
+            className="max-w-md mx-auto mt-12 p-8 bg-white rounded-lg shadow-lg flex flex-col gap-4 dark:bg-gray-400 "
         >
             <div>
-                <label htmlFor="username" className="block mb-1 font-medium text-gray-700">Username:</label>
+                <label htmlFor="username" className="block mb-1 font-medium dark:text-gray-900 ">Username:</label>
                 <input
                     type="text"
                     id="username"
@@ -42,7 +43,7 @@ const LoginForm = () => {
                 />
             </div>
             <div>
-                <label htmlFor="password" className="block mb-1 font-medium text-gray-700">Password:</label>
+                <label htmlFor="password" className="block mb-1 font-medium text-gray-900">Password:</label>
                 <input
                     type="password"
                     id="password"
@@ -60,6 +61,7 @@ const LoginForm = () => {
                 Login
             </button>
         </form>
+        </div>
     );
 };
 
