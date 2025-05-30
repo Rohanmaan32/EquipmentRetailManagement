@@ -6,9 +6,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     
     const users = [
-        { id: "1", role: "Admin", username: "admin@entnt.in", password: "admin123" },
-        { id: "2", role: "Staff", username: "staff@entnt.in", password: "staff123" },
-        { id: "3", role: "Customer", username: "customer@entnt.in", password: "cust123" },
+        { id: "1", role: "Admin", username: "admin@entnt.in", password: "admin123",roles:['create', 'edit', 'delete', 'view']},
+        { id: "2", role: "Staff", username: "staff@entnt.in", password: "staff123" ,roles:['edit', 'view']},
+        { id: "3", role: "Customer", username: "customer@entnt.in", password: "cust123",roles:['view'] },
         ];
         
     useEffect(() => {
