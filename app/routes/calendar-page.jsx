@@ -1,16 +1,16 @@
-import EquipmentList from "../components/Equipment/Equipment";
+import RentalCalendar from '../components/Rentals/RentalCalendar';
 import Topbar from '../components/Home/TopBar';
 import ProtectedRoute from "../components/Authentication/ProtectedRoute.jsx";
-const EquipmentPage = () => {
-    
+
+const CalendarPage = () => {
     return (
         <>
         <ProtectedRoute requiredRoles = {['view']} >
             < Topbar />
-            < EquipmentList />
+            < RentalCalendar />
         </ProtectedRoute>
         </>
     );
 };
 
-export default EquipmentPage;
+export default CalendarPage;
