@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { saveToLocalStorage, getFromLocalStorage } from '../utils/localStorageUtils';
-
+import { useNotification } from './NotificationContext';
 const RentalContext = createContext();
 
 const rentalData = [
@@ -40,7 +40,7 @@ const rentalData = [
 
 export const RentalProvider = ({ children }) => {
     const [rentals, setRentals] = useState([]);
-
+    const { addNotification } = useNotification();
     useEffect(() => {
         const storedRentals = getFromLocalStorage('rentals');
         if (storedRentals && storedRentals.length > 0) {
@@ -56,6 +56,7 @@ export const RentalProvider = ({ children }) => {
             const updatedRentals = [...rentals, newRental];
             setRentals(updatedRentals);
             saveToLocalStorage('rentals', updatedRentals);
+            addNotification('New rental order created successfully!', 'success');
             return { success: true, data: updatedRentals };
         } catch (error) {
             console.error('Error adding rental:', error);
@@ -70,6 +71,7 @@ export const RentalProvider = ({ children }) => {
             );
             setRentals(updatedRentals);
             saveToLocalStorage('rentals', updatedRentals);
+            addNotification('New rental order updated successfully!', 'success');
             return { success: true, data: updatedRentals };
         } catch (error) {
             console.error('Error updating rental:', error);
@@ -82,7 +84,10 @@ export const RentalProvider = ({ children }) => {
             const updatedRentals = rentals.filter(rental => rental.id !== rentalId);
             setRentals(updatedRentals);
             saveToLocalStorage('rentals', updatedRentals);
+            addNotification('Rental order removed successfully!', 'success');
+
             return { success: true, data: updatedRentals };
+
         } catch (error) {
             console.error('Error removing rental:', error);
             return { success: false, error: error.message };

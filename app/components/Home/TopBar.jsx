@@ -3,13 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import { useDarkMode } from "../../contexts/DarkModeContext.jsx";
 
-const links = [
+const links = [ 
+    { name: 'Dashboard', path: '/dashboard' },
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' },
     { name: 'Equipment', path: '/equipment' },
     { name: 'Rentals', path: '/rentals' },
     { name: 'Maintenance', path: '/maintenance' },
-    { name: 'Calendar', path: '/calendar' },
+    { name: 'Calendar', path: '/calendar' }
 ];
 
 const Topbar = () => {

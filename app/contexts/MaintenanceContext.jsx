@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { saveToLocalStorage, getFromLocalStorage } from '../utils/localStorageUtils';
-
+import { useNotification } from './NotificationContext'; 
 const MaintenanceContext = createContext();
 
 const maintenanceData = [
@@ -40,7 +40,7 @@ const maintenanceData = [
 
 export const MaintenanceProvider = ({ children }) => {
     const [maintenanceRecords, setMaintenanceRecords] = useState([]);
-
+    const { addNotification } = useNotification();
     useEffect(() => {
         const storedMaintenance = getFromLocalStorage('maintenance');
         if (storedMaintenance && storedMaintenance.length > 0) {
@@ -56,6 +56,7 @@ export const MaintenanceProvider = ({ children }) => {
             const updatedRecords = [...maintenanceRecords, newRecord];
             setMaintenanceRecords(updatedRecords);
             saveToLocalStorage('maintenance', updatedRecords);
+            addNotification('Maintenance record added.', 'success');
             return { success: true, data: updatedRecords };
         } catch (error) {
             console.error('Error adding maintenance record:', error);
@@ -70,6 +71,7 @@ export const MaintenanceProvider = ({ children }) => {
             );
             setMaintenanceRecords(updatedRecords);
             saveToLocalStorage('maintenance', updatedRecords);
+            addNotification('Maintenance record updated.', 'success');
             return { success: true, data: updatedRecords };
         } catch (error) {
             console.error('Error updating maintenance record:', error);
@@ -82,6 +84,7 @@ export const MaintenanceProvider = ({ children }) => {
             const updatedRecords = maintenanceRecords.filter(record => record.id !== recordId);
             setMaintenanceRecords(updatedRecords);
             saveToLocalStorage('maintenance', updatedRecords);
+            addNotification('Maintenance record removed.', 'success');
             return { success: true, data: updatedRecords };
         } catch (error) {
             console.error('Error removing maintenance record:', error);
