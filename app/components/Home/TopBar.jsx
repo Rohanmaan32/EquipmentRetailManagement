@@ -7,6 +7,9 @@ const links = [
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' },
     { name: 'Equipment', path: '/equipment' },
+    { name: 'Rentals', path: '/rentals' },
+    { name: 'Maintenance', path: '/maintenance' },
+    { name: 'Calendar', path: '/calendar' },
 ];
 
 const Topbar = () => {
