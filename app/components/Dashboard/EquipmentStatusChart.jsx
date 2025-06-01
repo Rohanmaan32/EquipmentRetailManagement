@@ -1,6 +1,6 @@
 
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useDarkMode } from '../../contexts/DarkModeContext'; 
+import { useDarkMode } from '../../contexts/DarkmodeContext'; 
 
 const EquipmentStatusChart = ({ available, rented, maintenance, outOfService }) => {
     const { isDarkMode } = useDarkMode(); 

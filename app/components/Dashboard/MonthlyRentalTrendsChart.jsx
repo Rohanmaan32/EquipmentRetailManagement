@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useMemo } from 'react';
-import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useDarkMode } from '../../contexts/DarkmodeContext';
 
 const MonthlyRentalTrendsChart = ({ rentals }) => {
     const { isDarkMode } = useDarkMode();

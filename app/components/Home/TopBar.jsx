@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from "../../contexts/AuthContext.jsx";
-import { useDarkMode } from "../../contexts/DarkModeContext.jsx";
+import { useDarkMode } from "../../contexts/DarkmodeContext.jsx";
 
 const links = [ 
     { name: 'Dashboard', path: '/dashboard' },
