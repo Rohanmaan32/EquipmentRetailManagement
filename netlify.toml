@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "react-router build"
+  publish = "build/client"
+
+[dev]
+  command = "react-router dev"
 
 [[redirects]]
   from = "/*"
