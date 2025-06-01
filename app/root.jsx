@@ -14,7 +14,7 @@ import { EquipmentProvider } from "./contexts/EquipmentContext";
 import { DarkModeProvider } from "./contexts/DarkmodeContext";
 import { RentalProvider } from './contexts/RentalContext';
 import { MaintenanceProvider } from './contexts/MaintenanceContext';
-
+import { NotificationProvider } from "./contexts/NotificationContext";
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -35,17 +35,19 @@ export function Layout({ children }) {
 
 export default function App() {
   return (
-    <DarkModeProvider>
-      <AuthProvider>
-        <EquipmentProvider>
-          <RentalProvider>
-            <MaintenanceProvider>
-              <Outlet />
-            </MaintenanceProvider>
-          </RentalProvider>    
-        </EquipmentProvider>
-      </AuthProvider>
-    </DarkModeProvider>
+    <NotificationProvider>
+      <DarkModeProvider>
+        <AuthProvider>
+          <EquipmentProvider>
+            <RentalProvider>
+              <MaintenanceProvider>
+                <Outlet />
+              </MaintenanceProvider>
+            </RentalProvider>    
+          </EquipmentProvider>
+        </AuthProvider>
+      </DarkModeProvider>
+    </NotificationProvider>
   );
 }
 

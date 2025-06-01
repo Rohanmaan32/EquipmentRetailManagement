@@ -5,7 +5,7 @@ import { useDarkMode } from "../../contexts/DarkModeContext.jsx";
 
 const links = [ 
     { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/' }, 
     { name: 'Login', path: '/login' },
     { name: 'Equipment', path: '/equipment' },
     { name: 'Rentals', path: '/rentals' },
@@ -16,16 +16,15 @@ const links = [
 const Topbar = () => {
     const [menu, setMenu] = useState(false);
     const location = useLocation();
-    const currentPage = links.find((page) => page.path === location.pathname)?.name || 'Home';
+    const currentPage = links.find((page) => page.path === location.pathname)?.name || 
+                        (location.pathname === '/' ? 'Dashboard' : 'Page'); // Default to Dashboard for '/'
     const { user, logout } = useAuth();
     const { isDarkMode, toggleDarkMode } = useDarkMode();
     
     return (
         <>
-
             <div className="bg-blue-900 dark:bg-gray-900 shadow-md fixed top-0 right-0 left-0 z-50 transition-colors duration-200">
-                <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
-
+                <div className="flex items-center justify-between p-4"> 
                     <div className='flex items-center'>
                         <button 
                             onClick={() => setMenu(!menu)} 
@@ -43,7 +42,6 @@ const Topbar = () => {
                             )}
                         </button>
                     </div>
-
 
                     <div className='flex-1 text-center'>
                         <h1 className="text-xl font-bold text-white">{currentPage}</h1>
@@ -88,8 +86,14 @@ const Topbar = () => {
                 </div>
             </div>
 
-    
-            <div className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
+            {menu && (
+                <div 
+                    className="fixed inset-0 z-40 bg-black/40 dark:bg-gray-900/80 transition-colors duration-200"
+                    onClick={() => setMenu(false)}
+                />
+            )}
+
+            <div className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-xl z-[60] transform transition-transform duration-300 ease-in-out ${ // Increased z-index for sidebar
                 menu ? 'translate-x-0' : '-translate-x-full'
             }`}>
                 <div className="flex items-center justify-between p-4 bg-blue-900 dark:bg-gray-900 text-white">
@@ -125,7 +129,7 @@ const Topbar = () => {
                     </ul>
                 </nav>
 
-                <div className="px-4 mb-4">
+                <div className="px-4 mb-4 mt-auto"> 
                     <button
                         onClick={toggleDarkMode}
                         className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
@@ -146,7 +150,7 @@ const Topbar = () => {
                 </div>
 
                 {user && (
-                    <div className="absolute bottom-4 left-4 right-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <div className="sticky bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"> {/* Made user info sticky at bottom of sidebar */}
                         <div className="px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <p className="text-sm text-gray-600 dark:text-gray-400">Logged in as:</p>
                             <p className="font-medium text-gray-900 dark:text-white">{user.role}</p>
@@ -155,7 +159,7 @@ const Topbar = () => {
                                     logout();
                                     setMenu(false);
                                 }}
-                                className="mt-2 text-sm text-red-600 dark:text-red-400 hover:underline"
+                                className="mt-2 text-sm text-red-600 dark:text-red-400 hover:underline w-full text-left"
                             >
                                 Logout
                             </button>

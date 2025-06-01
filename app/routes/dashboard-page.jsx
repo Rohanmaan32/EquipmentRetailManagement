@@ -1,10 +1,14 @@
-import KPICard from '../components/dashboard/KPICard';
-import EquipmentStatusChart from '../components/dashboard/EquipmentStatusChart';
+import KPICard from '../components/Dashboard/KPICard';
+import EquipmentStatusChart from '../components/Dashboard/EquipmentStatusChart';
+import RentalsByStatusChart from '../components/Dashboard/RentalsByStatusChart';
+import MonthlyRentalTrendsChart from '../components/Dashboard/MonthlyRentalTrendsChart';
 import { useEquipment } from '../contexts/EquipmentContext';
 import { useRental } from '../contexts/RentalContext';
 import { useMaintenance } from '../contexts/MaintenanceContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useMemo } from 'react';
+import Topbar from '../components/Home/TopBar';
+import ProtectedRoute from '../components/Authentication/ProtectedRoute';
 // some complicated svg stuff. no idea how this works but it does
 const UserGroupIcon = () => <svg className="w-8 h-8 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>;
 const CheckBadgeIcon = () => <svg className="w-8 h-8 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>;
@@ -62,6 +66,10 @@ export default function DashboardPage() {
     }
     
     return (
+        <>
+        <ProtectedRoute requiredRoles={["view"]}></ProtectedRoute>
+        
+        <Topbar></Topbar>
         <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 p-6 transition-colors">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Dashboard</h1>
 
@@ -83,10 +91,18 @@ export default function DashboardPage() {
                     />
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Rental Overview (Placeholder)</h2>
-                    <p className="text-gray-600 dark:text-gray-400">More rental charts coming soon...</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Rentals by Status</h2>
+                    <RentalsByStatusChart rentals={rentals} />
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700 lg:col-span-2"> {/* Span full width on large screens if only one more chart */}
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Monthly Rental Trends (Last 6 Months)</h2>
+                    <MonthlyRentalTrendsChart rentals={rentals} />
                 </div>
             </div>
         </div>
+        
+        </>
     );
 }
+
